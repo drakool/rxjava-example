@@ -2,13 +2,17 @@ package com.hany.java.rxjavaexample;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.regex.*;  
 
 import java.beans.BeanProperty;
 import java.beans.JavaBean;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Flow.Subscriber;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -94,10 +98,31 @@ class RxjavaExampleApplicationTests {
 		
 		assertTrue(s.say().equals("default") );
 		assertTrue(s.say(1).equals("Parameter 1"));
-		
-		
+	}
+
+
+	@Test
+	public void givenMap_whencallingentrySet_shouldreturnmutableSet(){
+		Map<String, String> testMap = new HashMap<>();
+		String[] keys = {"one", "two", "three", "four"};
+		String [] values={"cat", "dog", "mouse", "elephant"};
+
+		int length = keys.length;
+		testMap =  zipToMap(Arrays.asList(keys), Arrays.asList(values));
+
+		assertTrue(testMap.get("one").equals("cat"));
+		assertTrue(testMap.get("two").equals("dog"));
 	}
 	
+
+	public static <K, V> Map<K, V> zipToMap(List<K> keys, List<V> values) {
+		return IntStream.range(0, keys.size()).boxed()
+				.collect(Collectors.toMap(keys::get, values::get));
+	}
+	
+	
+
+
 	@Test
 	public void givenRunnable_whenNotImplemented_shouldImplement()
 	{
