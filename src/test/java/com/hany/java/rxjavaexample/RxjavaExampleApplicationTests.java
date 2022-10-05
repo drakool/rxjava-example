@@ -6,16 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.beans.BeanProperty;
 import java.beans.JavaBean;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Flow.Subscriber;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import rx.Observable;
 
 @SpringBootTest
 class RxjavaExampleApplicationTests {
+
+	private static final Logger LOG = LoggerFactory.getLogger(RxjavaExampleApplication.class);
 	
 	Observable observable;
 
@@ -111,6 +117,16 @@ class RxjavaExampleApplicationTests {
 		FuncInterface interfaceX = new FuncInterfaceImpl();
 		assertTrue(interfaceX.normalFun().equals("Hello"));
 		assertTrue(interfaceX.abstractFun(1).equals("AbstractFun output 1"));
+	}
+
+
+	@Test
+	public void whenPassingLambdaToComputeIfAbsent_thenTheValueGetsComputedAndPutIntoMap()
+	{
+		Map<String, Integer> nameMap = new HashMap<>();
+		Integer value = nameMap.computeIfAbsent("John", s -> s.length());
+
+		
 	}
 
 	interface Sayable{
