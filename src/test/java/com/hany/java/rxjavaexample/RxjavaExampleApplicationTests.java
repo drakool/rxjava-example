@@ -32,7 +32,16 @@ class RxjavaExampleApplicationTests {
 	private String result = "";
 
 	
-	
+	public static Observable<Integer> fakeUserInput()
+	{
+		return Observable.just(10,17,3,8);
+	}
+
+	@Test
+	public void givenObservable_whenSubscribing_shouldEmitSameSequence()
+	{
+		fakeUserInput().subscribe(line->System.out.println(line) );
+	}
 	
 	@Test
 	void contextLoads() {
@@ -151,7 +160,6 @@ class RxjavaExampleApplicationTests {
 		Map<String, Integer> nameMap = new HashMap<>();
 		Integer value = nameMap.computeIfAbsent("John", s -> s.length());
 
-		
 	}
 
 	interface Sayable{

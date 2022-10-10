@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,14 @@ public class ChallengeTests {
 		List<String> referenceList = new ArrayList<>(List.of("2","6","7","9","3"));
 		assertEquals(returnList.size(),referenceList.size());
 	}
+
+	@Test
+	public void givenIntstream_whenUsingIterateMethod_shouldReturnCorrectValues(){
+		IntStream intStream = IntStream.range(0, 100);
+		// IntStream tempStream = IntStream.iterate(0, elem->elem%2,elem->elem<)
+	}
+
+
 	@Test
 	public void test1() {
 		assertTrue( ChallengeTests.sevenBoom(new int[]{2, 6, 7, 9, 3}));
