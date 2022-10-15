@@ -9,6 +9,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,10 +24,10 @@ public class IntStreamIterateTest {
             new Widget (5, Widget.Color.BLUE),new Widget (10, Widget.Color.GREEN)}    ;
     
     /**
-     * Given object array when using stream filtering should iterate through the list of objects then return sum of fitlered objects.
+     * Given object array when using stream filtering should iterate through the list of objects then return sum of filtered objects.
      */
     @Test
-    public void givenObjectArray_whenUsingStreamFiltering_shouldIterateThroughTheListOfObjects_thenReturnSumOfFitleredObjects() {
+    public void givenObjectArray_whenUsingStreamFiltering_shouldIterateThroughTheListOfObjects_thenReturnSumOfFilteredObjects() {
 
         IntStream intStream = IntStream.iterate(10, i -> i + 5)
                 .limit(5);
@@ -35,7 +36,16 @@ public class IntStreamIterateTest {
         assertEquals (35,Arrays.stream(widgets).filter(w -> w.getColor()==Widget.Color.BLUE)
             .mapToInt(i -> i.getWeight()).reduce( 0, (num1, num2)-> num1+num2));
     }
+    
+    /**
+     * Given object array when implementing comparable should return sorted list.
+     */
+    @Test
+    public void  givenObjectArray_whenImplementingComparable_shouldReturnSortedList()
+    {
+        Stream.of(widgets).sorted().forEach( item -> System.out.println(item));
 
+    }
     @Test
     public void iterate_thorugh() {
         
